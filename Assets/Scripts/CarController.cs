@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+
     [System.Serializable]
     public struct Wheel
     {
         public WheelCollider collider;
+        public Transform transform;
     }
 
     [System.Serializable]
@@ -41,6 +43,17 @@ public class CarController : MonoBehaviour
                 axle.leftWheel.collider.motorTorque = motor;
                 axle.rightWheel.collider.motorTorque = motor;
             }
+
+            UpdateWheeltransform(axle.leftWheel);
+            UpdateWheeltransform(axle.rightWheel);
         }
+    }
+
+    public void UpdateWheeltransform(Wheel wheel)
+    {
+        wheel.collider.GetWorldPose(out Vector3 position, out Quaternion rotation);
+
+        wheel.transform.position = position;
+        wheel.transform.rotation = rotation;
     }
 }
