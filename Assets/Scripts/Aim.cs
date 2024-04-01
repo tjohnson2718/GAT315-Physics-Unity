@@ -14,9 +14,6 @@ public class Aim : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        prevAxis.x = -Input.GetAxis("Mouse Y");
-        prevAxis.y = Input.GetAxis("Mouse X");
     }
 
     void Update()
@@ -26,8 +23,8 @@ public class Aim : MonoBehaviour
         axis.x = -Input.GetAxis("Mouse Y") - prevAxis.x;
         axis.y = Input.GetAxis("Mouse X") - prevAxis.y;
 
-        rotation.x *= axis.x * sensitivity;
-        rotation.y *= axis.y * sensitivity;
+        rotation.x += axis.x * sensitivity;
+        rotation.y += axis.y * sensitivity;
 
         rotation.x = Mathf.Clamp(rotation.x, -50, 50);
         rotation.y = Mathf.Clamp(rotation.y, -40, 40);
