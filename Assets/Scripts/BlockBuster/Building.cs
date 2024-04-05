@@ -17,6 +17,7 @@ public class Building : MonoBehaviour
             Instantiate(destroyPrefab, spawnPos, Quaternion.identity);
             sound.Play();
             Destroy(gameObject);
+            Destroy(destroyPrefab, 3);
         }
     }
 
