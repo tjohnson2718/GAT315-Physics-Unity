@@ -9,6 +9,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField, Range(1, 10)] float jumpHeight = 1.0f;
     [SerializeField] float rotationSpeed = 3.0f;
     [SerializeField] Transform view;
+    [SerializeField] Animator animator;
 
     private CharacterController controller;
     private Vector3 velocity;
@@ -48,6 +49,16 @@ public class CharacterMovement : MonoBehaviour
 
         velocity.y += gravityValue * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            animator.SetBool("Equipped", !animator.GetBool("Equipped"));
+        }
+
+        // animations
+        animator.SetFloat("Speed", move.magnitude * playerSpeed);
+        animator.SetFloat("VelocityY", velocity.y);
+        animator.SetBool("OnGround", onGround);
     }
 
     // this script pushes all rigidbodies that the character touches
