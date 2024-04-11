@@ -7,6 +7,8 @@ using UnityEngine.Animations;
 public class Aim : MonoBehaviour
 {
     [SerializeField] float sensitivity = 3;
+    [SerializeField] float yawLimit = 50;
+    [SerializeField] float pitchLimit = 50;
 
     Vector3 rotation = Vector3.zero;
     Vector2 prevAxis = Vector3.zero;
@@ -26,8 +28,8 @@ public class Aim : MonoBehaviour
         rotation.x += axis.x * sensitivity;
         rotation.y += axis.y * sensitivity;
 
-        rotation.x = Mathf.Clamp(rotation.x, -6, 6);
-        rotation.y = Mathf.Clamp(rotation.y, -10, 10);
+        rotation.x = Mathf.Clamp(rotation.x, -pitchLimit, pitchLimit);
+        rotation.y = Mathf.Clamp(rotation.y, -yawLimit, yawLimit);
 
         Quaternion q_yaw = Quaternion.AngleAxis(rotation.y * sensitivity, Vector3.up);
         Quaternion q_pitch = Quaternion.AngleAxis(rotation.x * sensitivity, Vector3.right);

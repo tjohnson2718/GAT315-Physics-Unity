@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] GameObject ammoPrefab;
+    [SerializeField] GameObject ammo;
     [SerializeField] Transform emission;
     [SerializeField] AudioSource audioSource;
 
+    public bool equipped = false;
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        Debug.DrawRay(emission.position, emission.forward * 10, Color.red);
+
+        if (equipped && Input.GetMouseButtonDown(0))
         {
-            audioSource.Play();
-            Instantiate(ammoPrefab, emission.position, emission.rotation);
+            if (audioSource != null) audioSource.Play();
+            Instantiate(ammo, emission.position, emission.rotation);
         }
     }
 }
